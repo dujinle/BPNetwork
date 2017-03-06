@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-*- coding : utf-8 -*-
 
-import sys
+import sys,struct
 
 if __name__ == '__main__':
 	if len(sys.argv) < 2:
@@ -15,8 +15,9 @@ if __name__ == '__main__':
 		i = i.strip('\n').strip('\r');
 		i = i.decode('utf8');
 		for j,m in enumerate(i):
-			m = m.encode('utf8');
-			bdic[m] = 1;
+			bm = m.encode('gbk');
+			um = m.encode('utf8');
+			bdic[um] = struct.unpack('>H',bm)[0];
 	fp.close();
 	for m in bdic.keys():
-		print m;
+		print m,bin(bdic[m]);

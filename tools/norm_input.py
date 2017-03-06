@@ -25,13 +25,15 @@ if __name__ == '__main__':
 	fp = open(ifile,'r');
 	for i in fp.readlines():
 		i = i.strip('\n').strip('\r');
-		tlist = ['0' for t in range(13)];
+		tlist = ['0000000000000000' for t in range(13)];
 		i = i.decode('utf8');
 		for j,m in enumerate(i):
 			m = m.encode('utf8');
 			if bmap.has_key(m):
 				tlist[j] = bmap[m];
-			else:
-				tlist[j] = '0';
-		print '\t'.join(tlist);
+		tstr = ''.join(tlist);
+		tlist = ['0' for t in range(208)];
+		for j,m in enumerate(tstr):
+			tlist[j] = m;
+		print ' '.join(tlist);
 	fp.close();
